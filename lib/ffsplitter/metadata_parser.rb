@@ -1,6 +1,6 @@
 module FFSplitter
   class MetadataParser
-    Chapter = Struct.new(:start, :end, :title)
+    Chapter = Struct.new(:start, :end, :title, :timebase)
 
     def self.parse_chapters(metadata)
       chapters = []
@@ -11,12 +11,16 @@ module FFSplitter
           chapter = Chapter.new
         end
 
+        if line =~ /TIMEBASE=(\d+)\/(\d+)/
+          chapter.timebase = $1.to_f / $2.to_f
+        end
+
         if line =~ /START=(\d+)/
-          chapter.start = $1.to_i
+          chapter.start = $1.to_i * chapter.timebase
         end
 
         if line =~ /END=(\d+)/
-          chapter.end = $1.to_i
+          chapter.end = $1.to_i * chapter.timebase
         end
 
         if chapter && line =~ /title=(.*)/
