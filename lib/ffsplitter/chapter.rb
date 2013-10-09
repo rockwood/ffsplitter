@@ -9,7 +9,7 @@ module FFSplitter
     end
 
     def filename
-      "#{@title}"
+      @title.lstrip
     end
   end
 end
