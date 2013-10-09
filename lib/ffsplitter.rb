@@ -1,6 +1,7 @@
 require "ffsplitter/version"
 require "ffsplitter/metadata_parser"
 require "ffsplitter/chapter"
+require "ffsplitter/command_runner"
 
 module FFSplitter
   class Splitter
@@ -9,7 +10,7 @@ module FFSplitter
     end
 
     def self.read_metadata(filename)
-      `ffmpeg -i #{filename} -v quiet -f ffmetadata -`
+      CommandRunner.run("ffmpeg -i #{filename} -v quiet -f ffmetadata -")
     end
   end
 
