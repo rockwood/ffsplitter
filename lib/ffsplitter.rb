@@ -2,11 +2,13 @@ require "ffsplitter/version"
 require "ffsplitter/metadata_parser"
 require "ffsplitter/chapter"
 require "ffsplitter/command_runner"
+require "ffsplitter/encoder"
 
 module FFSplitter
   class Splitter
     def self.split!(filename)
-      puts MetadataParser.new(read_metadata(filename)).parse
+      chapters = MetadataParser.parse_chapters(read_metadata(filename))
+      Encoder.new(filename).encode(chapters)
     end
 
     def self.read_metadata(filename)
