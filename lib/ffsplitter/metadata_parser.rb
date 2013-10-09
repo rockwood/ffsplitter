@@ -14,11 +14,11 @@ module FFSplitter
         end
 
         if line =~ /START=(\d+)/
-          chapter.start_time = $1.to_i * chapter.timebase
+          chapter.start_frames = $1
         end
 
         if line =~ /END=(\d+)/
-          chapter.end_time = $1.to_i * chapter.timebase
+          chapter.end_frames = $1
         end
 
         if chapter && line =~ /title=(.*)/
