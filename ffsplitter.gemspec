@@ -5,7 +5,7 @@ require 'ffsplitter/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "ffsplitter"
-  spec.version       = Ffsplitter::VERSION
+  spec.version       = FFSplitter::VERSION
   spec.authors       = ["Kevin Rockwood"]
   spec.email         = ["kevin@rockwood.me"]
   spec.description   = %q{TODO: Write a gem description}
