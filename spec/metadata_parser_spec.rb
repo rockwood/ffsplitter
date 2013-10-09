@@ -23,12 +23,12 @@ module FFSplitter
         expect(first_chapter.timebase).to eq(0.5)
       end
 
-      it "multiplies the start frames by the timebase" do
-        expect(first_chapter.start).to eq(50)
+      it "multiplies the start time by the timebase" do
+        expect(first_chapter.start_time).to eq(50)
       end
 
       it "multiplies the end frames by the timebase" do
-        expect(first_chapter.end).to eq(100)
+        expect(first_chapter.end_time).to eq(100)
       end
 
       it "parses the title" do
