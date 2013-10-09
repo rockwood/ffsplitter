@@ -1,5 +1,6 @@
 require "ffsplitter/version"
 require "ffsplitter/metadata_parser"
+require "ffsplitter/chapter"
 
 module FFSplitter
   class Splitter
