@@ -7,8 +7,8 @@ require "ffsplitter/encoder"
 module FFSplitter
   class Splitter
     def self.split!(filename)
-      chapters = MetadataParser.parse_chapters(read_metadata(filename))
-      Encoder.new(filename).encode(chapters)
+      chapter_collection = MetadataParser.parse_chapters(read_metadata(filename))
+      Encoder.new(filename).encode(chapter_collection.chapters)
     end
 
     def self.read_metadata(filename)
