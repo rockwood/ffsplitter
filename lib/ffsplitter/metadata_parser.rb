@@ -1,6 +1,6 @@
 module FFSplitter
   class MetadataParser
-    def self.parse_chapters(metadata)
+    def self.parse(metadata)
       chapters = []
       chapter = nil
 

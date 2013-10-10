@@ -3,7 +3,7 @@ require 'fixtures/metadata_fixtures'
 
 module FFSplitter
   describe MetadataParser do
-    describe ".parse_chapters" do
+    describe ".parse" do
       context "with a single chapter" do
         let(:metadata) do
           <<-EOF
@@ -14,7 +14,7 @@ module FFSplitter
             title=Ludwig van Beethoven - Piano Trio in D Major
           EOF
         end
-        let(:chapters){ MetadataParser.parse_chapters(metadata) }
+        let(:chapters){ MetadataParser.parse(metadata) }
         it "parses the chapters as an array" do
           expect(chapters.count).to eq(1)
         end
@@ -45,7 +45,7 @@ module FFSplitter
             title=Chapter Two
           EOF
         end
-        let(:chapters){ MetadataParser.parse_chapters(metadata) }
+        let(:chapters){ MetadataParser.parse(metadata) }
         it "parses all the chapters" do
           expect(chapters.count).to eq(2)
         end
