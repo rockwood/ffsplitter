@@ -19,8 +19,7 @@ module FFSplitter
       @chapters.each { |c| yield c }
     end
 
-    def add(attrs)
-      chapter = Chapter.new(attrs)
+    def add(chapter)
       @chapters << chapter
       chapter.index = find_index(chapter)
       chapter

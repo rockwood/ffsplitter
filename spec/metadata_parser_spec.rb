@@ -24,11 +24,11 @@ module FFSplitter
         end
 
         it "sets the start_frames" do
-          expect(chapters.first[:start_frames]).to eq("100")
+          expect(chapters.first[:start_frames]).to eq(100)
         end
 
         it "sets the end_frames" do
-          expect(chapters.first[:end_frames]).to eq("200")
+          expect(chapters.first[:end_frames]).to eq(200)
         end
 
         it "parses the title" do
