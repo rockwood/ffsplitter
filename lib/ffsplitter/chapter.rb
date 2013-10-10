@@ -1,7 +1,7 @@
 require 'virtus'
 
 module FFSplitter
-  class ChapterCollection
+  class ChapterList
 
     include Enumerable
 
