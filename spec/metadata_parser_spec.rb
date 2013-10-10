@@ -15,25 +15,24 @@ module FFSplitter
           EOF
         end
         let(:chapters){ MetadataParser.parse_chapters(metadata) }
-        let(:first_chapter){ chapters.first }
         it "parses the chapters as an array" do
           expect(chapters.count).to eq(1)
         end
 
         it "calculates the timebase" do
-          expect(first_chapter.timebase).to eq(0.5)
+          expect(chapters.first[:timebase]).to eq(0.5)
         end
 
         it "sets the start_frames" do
-          expect(first_chapter.start_frames).to eq("100")
+          expect(chapters.first[:start_frames]).to eq("100")
         end
 
         it "sets the end_frames" do
-          expect(first_chapter.end_frames).to eq("200")
+          expect(chapters.first[:end_frames]).to eq("200")
         end
 
         it "parses the title" do
-          expect(first_chapter.title).to eq("Ludwig van Beethoven - Piano Trio in D Major")
+          expect(chapters.first[:title]).to eq("Ludwig van Beethoven - Piano Trio in D Major")
         end
       end
 
