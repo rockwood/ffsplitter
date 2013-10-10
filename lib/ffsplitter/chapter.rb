@@ -3,16 +3,21 @@ require 'virtus'
 module FFSplitter
   class ChapterCollection
 
-    attr_reader :chapters
+    include Enumerable
 
     def initialize
       @chapters = []
     end
 
-    def add(chapter)
-      chapter.index = @chapters.size
+    def each(&block)
+      @chapters.each { |c| yield c }
+    end
+
+    def add(attrs)
+      chapter = Chapter.new(attrs)
       @chapters << chapter
-      self
+      chapter.index = find_index(chapter)
+      chapter
     end
   end
 

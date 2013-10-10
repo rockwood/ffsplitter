@@ -14,10 +14,10 @@ module FFSplitter
             title=Ludwig van Beethoven - Piano Trio in D Major
           EOF
         end
-        let(:chapter_collection){ MetadataParser.parse_chapters(metadata) }
-        let(:first_chapter){ chapter_collection.chapters.first }
+        let(:chapters){ MetadataParser.parse_chapters(metadata) }
+        let(:first_chapter){ chapters.first }
         it "parses the chapters as an array" do
-          expect(chapter_collection.chapters.length).to eq(1)
+          expect(chapters.count).to eq(1)
         end
 
         it "calculates the timebase" do
@@ -46,13 +46,9 @@ module FFSplitter
             title=Chapter Two
           EOF
         end
-        let(:chapter_collection){ MetadataParser.parse_chapters(metadata) }
+        let(:chapters){ MetadataParser.parse_chapters(metadata) }
         it "parses all the chapters" do
-          expect(chapter_collection.chapters.length).to eq(2)
-        end
-        it "sets up the indexes" do
-          expect(chapter_collection.chapters.first.index).to eq(0)
-          expect(chapter_collection.chapters.last.index).to eq(1)
+          expect(chapters.count).to eq(2)
         end
       end
     end

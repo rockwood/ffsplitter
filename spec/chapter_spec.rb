@@ -3,15 +3,13 @@ require 'spec_helper'
 module FFSplitter
   describe ChapterCollection do
     let(:chapter_collection) { ChapterCollection.new }
-    let(:chapter1) { Chapter.new(title: "Chapter One") }
-    let(:chapter2) { Chapter.new(title: "Chapter Two") }
     describe "#add" do
       context "with a chapter object" do
-        before { chapter_collection.add(chapter1) }
-        before { chapter_collection.add(chapter2) }
+        let!(:chapter1) { chapter_collection.add(title: "Chapter One") }
+        let!(:chapter2) { chapter_collection.add(title: "Chapter Two") }
         it "adds it to its collection" do
-          expect(chapter_collection.chapters.first).to eq(chapter1)
-          expect(chapter_collection.chapters.last).to eq(chapter2)
+          expect(chapter_collection.count).to eq(2)
+          expect(chapter_collection.first).to eq(chapter1)
         end
         it "sets the chapter's index" do
           expect(chapter1.index).to eq(0)
