@@ -9,6 +9,12 @@ module FFSplitter
       @chapters = []
     end
 
+    def self.from_metadata(metadata)
+      list = new
+      metadata.each { |c| list.add(c) }
+      list
+    end
+
     def each(&block)
       @chapters.each { |c| yield c }
     end

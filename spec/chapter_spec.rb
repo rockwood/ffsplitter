@@ -2,8 +2,18 @@ require 'spec_helper'
 
 module FFSplitter
   describe ChapterList do
-    let(:chapter_list) { ChapterList.new }
+    describe ".from_metadata" do
+      let(:metadata){ [{start_frames: 1, end_frames: 2, title: "test chapter"}] }
+      let(:chapter_list) { ChapterList.from_metadata(metadata) }
+
+      it "adds the chapters" do
+        expect(chapter_list.count).to eq(1)
+        expect(chapter_list.first.title).to eq("test chapter")
+      end
+    end
+
     describe "#add" do
+      let(:chapter_list) { ChapterList.new }
       context "with a chapter object" do
         let!(:chapter1) { chapter_list.add(title: "Chapter One") }
         let!(:chapter2) { chapter_list.add(title: "Chapter Two") }
