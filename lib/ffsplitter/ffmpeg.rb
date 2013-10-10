@@ -1,14 +1,18 @@
 module FFSplitter
-  class Encoder
-    def initialize(input_file, options={})
+  class FFMpeg
+    def initialize(input_file, runner=CommandRunner)
       @input_file = input_file
-      @runner = options[:runner] || CommandRunner
+      @runner = runner
     end
 
     def encode(chapters)
       chapters.each do |chapter|
         @runner.run(chapter_command(chapter))
       end
+    end
+
+    def read_metadata
+      @runner.run("ffmpeg -i #{@input_file} -v quiet -f ffmetadata -")
     end
 
     private
