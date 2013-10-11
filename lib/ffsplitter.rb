@@ -2,17 +2,17 @@ require "ffsplitter/version"
 require "ffsplitter/metadata_parser"
 require "ffsplitter/chapter"
 require "ffsplitter/command_runner"
-require "ffsplitter/encoder"
+require "ffsplitter/ffmpeg"
 
 module FFSplitter
   class Splitter
-    def self.split!(filename)
-      chapter_collection = MetadataParser.parse_chapters(read_metadata(filename))
-      Encoder.new(filename).encode(chapter_collection.chapters)
+    def self.split_via_ffmpeg(filename)
+      split(filename, FFMpeg.new(filename))
     end
 
-    def self.read_metadata(filename)
-      CommandRunner.run("ffmpeg -i #{filename} -v quiet -f ffmetadata -")
+    def self.split(filename, codec)
+      chapter_list = MetadataParser.parse(codec.read_metadata)
+      codec.encode(chapter_list)
     end
   end
 
@@ -30,7 +30,7 @@ module FFSplitter
         puts "WTF mate?"
         exit(1)
       else
-        Splitter.split!(@argv[0])
+        Splitter.split_via_ffmpeg(@argv[0])
       end
     end
   end
