@@ -20,9 +20,8 @@ module FFSplitter
     end
 
     def add(chapter)
+      chapter.list = self
       @chapters << chapter
-      chapter.index = find_index(chapter)
-      chapter
     end
   end
 
@@ -31,9 +30,10 @@ module FFSplitter
 
     attribute :start_frames, Integer, default: 0
     attribute :end_frames, Integer, default: 0
-    attribute :index, Integer, default: 0
     attribute :timebase, Float, default: 1/30000
     attribute :title, String
+
+    attr_accessor :list
 
     def start_time
       timebase * start_frames
@@ -45,6 +45,11 @@ module FFSplitter
 
     def filename
       "#{track} #{title.lstrip}"
+    end
+
+    def index
+      return 0 if list.nil?
+      list.find_index(self)
     end
 
     def track

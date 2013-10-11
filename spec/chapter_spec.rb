@@ -4,17 +4,19 @@ module FFSplitter
   describe ChapterList do
     describe "#add" do
       let(:chapter_list) { ChapterList.new }
-      context "with a chapter object" do
-        let!(:chapter1) { chapter_list.add Chapter.new(title: "Chapter One") }
-        let!(:chapter2) { chapter_list.add Chapter.new(title: "Chapter Two") }
-        it "adds it to its collection" do
-          expect(chapter_list.count).to eq(2)
-          expect(chapter_list.first).to eq(chapter1)
-        end
-        it "sets the chapter's index" do
-          expect(chapter1.index).to eq(0)
-          expect(chapter2.index).to eq(1)
-        end
+      let!(:chapter1) { Chapter.new(title: "Chapter One") }
+      let!(:chapter2) { Chapter.new(title: "Chapter Two") }
+      before do
+        chapter_list.add(chapter1)
+        chapter_list.add(chapter2)
+      end
+      it "adds chapters to its collection" do
+        expect(chapter_list.count).to eq(2)
+        expect(chapter_list).to include(chapter1)
+        expect(chapter_list).to include(chapter2)
+      end
+      it "sets the chapter's list" do
+        expect(chapter1.list).to eq(chapter_list)
       end
     end
   end
@@ -29,9 +31,28 @@ module FFSplitter
     end
 
     describe "filename" do
-      let(:chapter){ Chapter.new(title: "   test title", index: 0) }
+      let(:chapter){ Chapter.new(title: "   test title") }
       it "prettys up the chapter title" do
         expect(chapter.filename).to eq("01 test title")
+      end
+    end
+
+    describe "#index" do
+      let(:chapter) { Chapter.new }
+      context "without a list" do
+        it "returns 0" do
+          expect(chapter.index).to eq(0)
+        end
+      end
+      context "with a list" do
+        let(:chapter_list) { ChapterList.new }
+        before do
+          chapter_list.add Chapter.new
+          chapter_list.add chapter
+        end
+        it "returns the index" do
+          expect(chapter.index).to eq(1)
+        end
       end
     end
   end
