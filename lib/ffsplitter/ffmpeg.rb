@@ -20,7 +20,7 @@ module FFSplitter
     private
 
     def chapter_command(chapter)
-      "ffmpeg -i #{filename} -ss #{chapter.start_time} -to #{chapter.end_time} -c copy '#{chapter.filename}.mp4'"
+      "ffmpeg -ss #{chapter.start_time} -i #{filename} -to #{chapter.end_time} -c copy '#{chapter.filename}.mp4'"
     end
   end
 end

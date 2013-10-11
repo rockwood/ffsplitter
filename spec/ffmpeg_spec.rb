@@ -11,7 +11,7 @@ module FFSplitter
       let(:chapter) { Chapter.new(start_frames: 10, end_frames: 20, timebase: 1, title: "title") }
       before { chapter_list.add(chapter) }
       it "encodes the chapters" do
-        expect(runner).to receive(:run).with "ffmpeg -i test.mp4 -ss 10.0 -to 20.0 -c copy '01 title.mp4'"
+        expect(runner).to receive(:run).with "ffmpeg -ss 10.0 -i test.mp4 -to 20.0 -c copy '01 title.mp4'"
         ffmpeg.encode(chapter_list)
       end
     end
