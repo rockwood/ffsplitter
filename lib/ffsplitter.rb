@@ -7,10 +7,10 @@ require "ffsplitter/ffmpeg"
 module FFSplitter
   class Splitter
     def self.split_via_ffmpeg(filename)
-      split(filename, FFMpeg.new(filename))
+      split(FFMpeg.new(filename))
     end
 
-    def self.split(filename, codec)
+    def self.split(codec)
       chapter_list = MetadataParser.parse(codec.read_metadata)
       codec.encode(chapter_list)
     end

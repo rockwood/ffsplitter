@@ -13,7 +13,7 @@ module FFSplitter
       it "parses and encodes" do
         expect(codec).to receive(:read_metadata).and_return(metadata)
         expect(codec).to receive(:encode).with(an_instance_of(ChapterList))
-        Splitter.split("test.mp4", codec)
+        Splitter.split(codec)
       end
     end
   end
