@@ -4,7 +4,7 @@ module FFSplitter
 
     def initialize(filename)
       self.filename = filename
-      runner = CommandRunner
+      self.runner = CommandRunner
     end
 
     def encode(chapters)
