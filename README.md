@@ -1,24 +1,17 @@
-# Ffsplitter
+# FFSplitter
 
 TODO: Write a gem description
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'ffsplitter'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install ffsplitter
+    gem install ffsplitter
 
 ## Usage
 
-TODO: Write usage instructions here
+Given the video file `my-video.mp4`
+And `my-video.mp4` has embedded chapter markers
+When I execute `ffsplitter my-video.mp4`
+Then `.mp4` files will be created for each chapter
 
 ## Contributing
 

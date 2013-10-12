@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = FFSplitter::VERSION
   spec.authors       = ["Kevin Rockwood"]
   spec.email         = ["kevin@rockwood.me"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Split video files into chapters}
+  spec.summary       = %q{ffsplitter will split a video file by its chapters}
   spec.homepage      = ""
   spec.license       = "MIT"
 
