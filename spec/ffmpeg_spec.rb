@@ -14,7 +14,7 @@ module FFSplitter
       before { chapter_list.add(chapter) }
       context "without an output directory" do
         it "encodes the chapters" do
-          expect(runner).to receive(:run).with(/-ss 10.0 -i 'test.mp4' -to 20.0/)
+          expect(runner).to receive(:run).with(/-i 'test.mp4' -ss 10.0 -to 20.0/)
           ffmpeg.encode(chapter_list)
         end
       end
@@ -22,6 +22,14 @@ module FFSplitter
         let(:output_directory) { "spec/tmp/" }
         it "encodes the chapters with an output directory" do
           expect(runner).to receive(:run).with(/spec\/tmp\/01 title.mp4/)
+          ffmpeg.encode(chapter_list)
+        end
+      end
+
+      context "with multiple files" do
+        before { chapter_list.add(Chapter.new(title: "Chapter 2")) }
+        it "encodes the chapters with a single ffmpeg command" do
+          expect(runner).to receive(:run).once()
           ffmpeg.encode(chapter_list)
         end
       end

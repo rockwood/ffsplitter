@@ -9,20 +9,17 @@ module FFSplitter
     end
 
     def encode(chapters)
-      chapters.each do |chapter|
-        runner.run(chapter_command(chapter))
-      end
+      commands = chapters.collect { |c| chapter_command(c) }
+      runner.run("ffmpeg #{commands.join(" ")}")
     end
 
     def read_metadata
       runner.run("ffmpeg -i '#{filename}' -v quiet -f ffmetadata -")
     end
 
-    private
-
     def chapter_command(chapter)
       output_file = File.expand_path(chapter.filename, output_directory)
-      "ffmpeg -ss #{chapter.start_time} -i '#{filename}' -to #{chapter.end_time} -c copy -v quiet '#{output_file}.mp4'"
+      "-i '#{filename}' -ss #{chapter.start_time} -to #{chapter.end_time} -c copy -v error '#{output_file}.mp4'"
     end
   end
 end
