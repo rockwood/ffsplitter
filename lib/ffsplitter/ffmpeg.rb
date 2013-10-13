@@ -2,7 +2,7 @@ module FFSplitter
   class FFMpeg
     attr_accessor :filename, :output_directory, :runner
 
-    def initialize(filename, output_directory="")
+    def initialize(filename, output_directory=nil)
       @filename = filename
       @output_directory = output_directory
       @runner = CommandRunner
