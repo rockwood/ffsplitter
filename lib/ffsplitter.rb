@@ -20,7 +20,7 @@ module FFSplitter
         puts "WTF mate?"
         exit(1)
       else
-        Splitter.split_via_ffmpeg(@argv[0])
+        Splitter.split_via_ffmpeg(@argv[0], @argv[1])
       end
     end
   end

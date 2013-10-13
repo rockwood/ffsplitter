@@ -1,10 +1,11 @@
 module FFSplitter
   class FFMpeg
-    attr_accessor :filename, :runner
+    attr_accessor :filename, :output_directory, :runner
 
-    def initialize(filename)
-      self.filename = filename
-      self.runner = CommandRunner
+    def initialize(filename, output_directory="")
+      @filename = filename
+      @output_directory = output_directory
+      @runner = CommandRunner
     end
 
     def encode(chapters)
@@ -20,7 +21,7 @@ module FFSplitter
     private
 
     def chapter_command(chapter)
-      "ffmpeg -ss #{chapter.start_time} -i #{filename} -to #{chapter.end_time} -c copy '#{chapter.filename}.mp4'"
+      "ffmpeg -ss #{chapter.start_time} -i #{filename} -to #{chapter.end_time} -c copy '#{output_directory}#{chapter.filename}.mp4'"
     end
   end
 end

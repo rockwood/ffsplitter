@@ -2,7 +2,9 @@ require 'spec_helper'
 
 module FFSplitter
   describe FFMpeg do
-    let(:ffmpeg){ FFMpeg.new("test.mp4") }
+    let(:filename) { "test.mp4" }
+    let(:output_directory) { nil }
+    let(:ffmpeg){ FFMpeg.new(filename, output_directory) }
     let(:runner) { double("runner") }
     before { ffmpeg.runner = runner }
 
@@ -10,9 +12,18 @@ module FFSplitter
       let(:chapter_list) { ChapterList.new }
       let(:chapter) { Chapter.new(start_frames: 10, end_frames: 20, timebase: 1, title: "title") }
       before { chapter_list.add(chapter) }
-      it "encodes the chapters" do
-        expect(runner).to receive(:run).with "ffmpeg -ss 10.0 -i test.mp4 -to 20.0 -c copy '01 title.mp4'"
-        ffmpeg.encode(chapter_list)
+      context "without an output directory" do
+        it "encodes the chapters" do
+          expect(runner).to receive(:run).with "ffmpeg -ss 10.0 -i test.mp4 -to 20.0 -c copy '01 title.mp4'"
+          ffmpeg.encode(chapter_list)
+        end
+      end
+      context "with an output directory" do
+        let(:output_directory) { "spec/tmp/" }
+        it "encodes the chapters with an output directory" do
+          expect(runner).to receive(:run).with "ffmpeg -ss 10.0 -i test.mp4 -to 20.0 -c copy 'spec/tmp/01 title.mp4'"
+          ffmpeg.encode(chapter_list)
+        end
       end
     end
 
