@@ -14,14 +14,14 @@ module FFSplitter
       before { chapter_list.add(chapter) }
       context "without an output directory" do
         it "encodes the chapters" do
-          expect(runner).to receive(:run).with "ffmpeg -ss 10.0 -i test.mp4 -to 20.0 -c copy '01 title.mp4'"
+          expect(runner).to receive(:run).with(/-ss 10.0 -i 'test.mp4' -to 20.0/)
           ffmpeg.encode(chapter_list)
         end
       end
       context "with an output directory" do
         let(:output_directory) { "spec/tmp/" }
         it "encodes the chapters with an output directory" do
-          expect(runner).to receive(:run).with "ffmpeg -ss 10.0 -i test.mp4 -to 20.0 -c copy 'spec/tmp/01 title.mp4'"
+          expect(runner).to receive(:run).with(/spec\/tmp\/01 title.mp4/)
           ffmpeg.encode(chapter_list)
         end
       end
@@ -29,7 +29,7 @@ module FFSplitter
 
     describe "#read_metadata" do
       it "reads the metadata" do
-        expect(runner).to receive(:run).with("ffmpeg -i test.mp4 -v quiet -f ffmetadata -")
+        expect(runner).to receive(:run).with("ffmpeg -i 'test.mp4' -v quiet -f ffmetadata -")
         ffmpeg.read_metadata
       end
     end

@@ -15,13 +15,14 @@ module FFSplitter
     end
 
     def read_metadata
-      runner.run("ffmpeg -i #{filename} -v quiet -f ffmetadata -")
+      runner.run("ffmpeg -i '#{filename}' -v quiet -f ffmetadata -")
     end
 
     private
 
     def chapter_command(chapter)
-      "ffmpeg -ss #{chapter.start_time} -i #{filename} -to #{chapter.end_time} -c copy '#{output_directory}#{chapter.filename}.mp4'"
+      output_file = File.expand_path(chapter.filename, output_directory)
+      "ffmpeg -ss #{chapter.start_time} -i '#{filename}' -to #{chapter.end_time} -c copy -v quiet '#{output_file}.mp4'"
     end
   end
 end
