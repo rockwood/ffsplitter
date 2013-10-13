@@ -1,9 +1,8 @@
 # FFSplitter
 
-TODO: Write a gem description
-
 ## Installation
 
+    brew install ffmpeg
     gem install ffsplitter
 
 ## Usage
