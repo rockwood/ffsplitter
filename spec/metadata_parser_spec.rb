@@ -20,19 +20,19 @@ module FFSplitter
         end
 
         it "calculates the timebase" do
-          expect(chapters.first[:timebase]).to eq(0.5)
+          expect(chapters.first.timebase).to eq(0.5)
         end
 
         it "sets the start_frames" do
-          expect(chapters.first[:start_frames]).to eq(100)
+          expect(chapters.first.start_frames).to eq(100)
         end
 
         it "sets the end_frames" do
-          expect(chapters.first[:end_frames]).to eq(200)
+          expect(chapters.first.end_frames).to eq(200)
         end
 
         it "parses the title" do
-          expect(chapters.first[:title]).to eq("Ludwig van Beethoven - Piano Trio in D Major")
+          expect(chapters.first.title).to eq("Ludwig van Beethoven - Piano Trio in D Major")
         end
       end
 
