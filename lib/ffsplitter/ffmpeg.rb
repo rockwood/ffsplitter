@@ -19,7 +19,7 @@ module FFSplitter
 
     def chapter_command(chapter)
       output_file = File.expand_path(chapter.filename, output_directory)
-      "-i '#{filename}' -ss #{chapter.start_time} -to #{chapter.end_time} -c copy -v error '#{output_file}.mp4'"
+      "-i '#{filename}' -ss #{chapter.start_time} -to #{chapter.end_time} -c copy '#{output_file}.mp4'"
     end
   end
 end
