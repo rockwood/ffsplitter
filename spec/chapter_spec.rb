@@ -30,10 +30,20 @@ module FFSplitter
       end
     end
 
-    describe "filename" do
-      let(:chapter){ Chapter.new(title: "   test title") }
-      it "prettys up the chapter title" do
-        expect(chapter.filename).to eq("01 test title")
+    describe "#filename" do
+      let(:filename) {""}
+      let(:chapter){ Chapter.new(title: filename) }
+      context "with leading spaces" do
+        let(:filename) { "   test title" }
+        it "removes them" do
+          expect(chapter.filename).to eq("01 test title")
+        end
+      end
+      context "with ';:" do
+        let(:filename) { "what's wrong; with: this" }
+        it "removes them" do
+          expect(chapter.filename).to eq("01 whats wrong with this")
+        end
       end
     end
 
