@@ -39,8 +39,8 @@ module FFSplitter
           expect(chapter.filename).to eq("01 test title")
         end
       end
-      context "with ';:" do
-        let(:filename) { "what's wrong; with: this" }
+      context "with ';:\\" do
+        let(:filename) { "what's wrong; with: \\this" }
         it "removes them" do
           expect(chapter.filename).to eq("01 whats wrong with this")
         end
