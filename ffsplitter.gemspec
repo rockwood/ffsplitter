@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["kevin@rockwood.me"]
   spec.description   = %q{Split video files into chapters}
   spec.summary       = %q{ffsplitter will split a video file by its chapters}
-  spec.homepage      = ""
+  spec.homepage      = "http://rockwoodpro.com"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
