@@ -5,7 +5,8 @@ module FFSplitter
     end
 
     def self.split(codec)
-      chapter_list = MetadataParser.parse(codec.read_metadata)
+      metadata = codec.read_metadata
+      chapter_list = MetadataParser.parse(metadata)
       codec.encode(chapter_list)
     end
   end
