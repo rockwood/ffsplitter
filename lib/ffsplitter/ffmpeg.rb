@@ -8,13 +8,13 @@ module FFSplitter
       @runner = CommandRunner
     end
 
-    def encode(chapters)
-      commands = chapters.collect { |c| chapter_command(c) }
-      runner.run("ffmpeg #{commands.join(" ")}")
-    end
-
     def read_metadata
       runner.run("ffmpeg -i '#{filename}' -v quiet -f ffmetadata -")
+    end
+
+    def encode(chapters)
+      commands = chapters.collect { |c| chapter_command(c) }
+      runner.run("ffmpeg #{commands.join(' ')}")
     end
 
     def chapter_command(chapter)
