@@ -45,6 +45,7 @@ module FFSplitter
           expect(command).to match("-ss 10.0")
           expect(command).to match("-to 20.0")
           expect(command).to match("-c copy")
+          expect(command).to match("-movflags faststart")
           expect(command).to match("#{File.expand_path(chapter.filename)}")
         end
       end
