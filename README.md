@@ -7,10 +7,15 @@
 
 ## Usage
 
-* Given the video file `my-video.mp4`
-* And `my-video.mp4` has embedded chapter markers
-* When I execute `ffsplitter my-video.mp4`
-* Then `.mp4` files will be created for each chapter
+`ffsplitter my-video.mp4`
+
+or 
+
+`ffsplitter my-video.mp4 output-directory/`
+
+## Testing
+
+`bundle exec rspec`
 
 ## Contributing
 
