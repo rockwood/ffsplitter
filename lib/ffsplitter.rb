@@ -1,6 +1,7 @@
 require "ffsplitter/version"
 require "ffsplitter/metadata_parser"
 require "ffsplitter/chapter"
+require "ffsplitter/chapter_list"
 require "ffsplitter/command_runner"
 require "ffsplitter/ffmpeg"
 require "ffsplitter/splitter"
