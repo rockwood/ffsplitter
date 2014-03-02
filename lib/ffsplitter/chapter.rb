@@ -37,6 +37,10 @@ module FFSplitter
       timebase * end_frames
     end
 
+    def duration
+      end_time - start_time
+    end
+
     def filename
       "#{track} #{title.gsub(/[';:\\]/, '').lstrip}"
     end

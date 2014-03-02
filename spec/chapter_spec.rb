@@ -65,5 +65,12 @@ module FFSplitter
         end
       end
     end
+
+    describe "#duration" do
+      let(:chapter){ Chapter.new(start_frames: 100, end_frames: 200, timebase: 0.5) }
+      it "is the difference of start and end times" do
+        expect(chapter.duration).to eq 50
+      end
+    end
   end
 end

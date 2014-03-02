@@ -1,5 +1,6 @@
 module FFSplitter
   class FFMpeg
+    CODEC_OPTIONS= "-c copy -movflags faststart"
     attr_accessor :filename, :output_directory, :runner
 
     def initialize(filename, output_directory=nil)
@@ -14,12 +15,12 @@ module FFSplitter
 
     def encode(chapters)
       commands = chapters.collect { |c| chapter_command(c) }
-      runner.run("ffmpeg #{commands.join(' ')}")
+      runner.run("#{commands.join(' && ')}")
     end
 
     def chapter_command(chapter)
       output_file = File.expand_path(chapter.filename, output_directory)
-      "-i '#{filename}' -ss #{chapter.start_time} -to #{chapter.end_time} -c copy -movflags faststart '#{output_file}.mp4'"
+      "ffmpeg -ss #{chapter.start_time} -i '#{filename}' -t #{chapter.duration} #{CODEC_OPTIONS} '#{output_file}.mp4'"
     end
   end
 end

@@ -16,7 +16,7 @@ module FFSplitter
       context "with a single chapter" do
         before { chapter_list.add(chapter1) }
         it "encodes the chapter" do
-          expect(runner).to receive(:run).with("ffmpeg #{ffmpeg.chapter_command(chapter1)}")
+          expect(runner).to receive(:run).with("#{ffmpeg.chapter_command(chapter1)}")
           ffmpeg.encode(chapter_list)
         end
       end
@@ -27,8 +27,8 @@ module FFSplitter
           chapter_list.add(chapter2)
         end
         it "encodes the chapters with a single ffmpeg command" do
-          commands = "#{ffmpeg.chapter_command(chapter1)} #{ffmpeg.chapter_command(chapter2)}"
-          expect(runner).to receive(:run).once.with("ffmpeg #{commands}")
+          commands = "#{ffmpeg.chapter_command(chapter1)} && #{ffmpeg.chapter_command(chapter2)}"
+          expect(runner).to receive(:run).once.with("#{commands}")
           ffmpeg.encode(chapter_list)
         end
       end
@@ -36,16 +36,15 @@ module FFSplitter
 
     describe "#chapter_command" do
       let(:command) { ffmpeg.chapter_command(chapter) }
-      let(:chapter) { Chapter.new(start_frames: 10, end_frames: 20, timebase: 1, title: "test title") }
+      let(:chapter) { Chapter.new(start_frames: 10, end_frames: 30, timebase: 1, title: "test title") }
 
       context "without an output directory" do
         let(:output_directory) { nil }
         it "creates a chapter command" do
-          expect(command).to match("-i 'test.mp4'")
-          expect(command).to match("-ss 10.0")
-          expect(command).to match("-to 20.0")
-          expect(command).to match("-c copy")
-          expect(command).to match("-movflags faststart")
+          expect(command).to match("-ss #{chapter.start_time}")
+          expect(command).to match("-i '#{filename}'")
+          expect(command).to match("-t #{chapter.duration}")
+          expect(command).to match(FFSplitter::FFMpeg::CODEC_OPTIONS)
           expect(command).to match("#{File.expand_path(chapter.filename)}")
         end
       end
