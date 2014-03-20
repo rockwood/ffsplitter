@@ -5,7 +5,7 @@ module FFSplitter
     before { Dir.mkdir("tmp") unless Dir.exist?("tmp") }
 
     describe "split" do
-      before { `bundle exec ruby -Ilib bin/ffsplitter 'spec/fixtures/test video.mp4' tmp 2>&1` }
+      before { `bundle exec ruby -Ilib bin/ffsplitter 'spec/fixtures/test video.mp4' -o tmp 2>&1` }
       let(:file_list) { Dir.glob("tmp/*")  }
       it "creates files" do
         expect(file_list).to include("tmp/01 Chapter 1.mp4")

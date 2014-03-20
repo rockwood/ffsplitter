@@ -3,8 +3,8 @@ require 'spec_helper'
 module FFSplitter
   describe FFMpeg do
     let(:filename) { "test.mp4" }
-    let(:output_directory) { nil }
-    let(:ffmpeg){ FFMpeg.new(filename, output_directory) }
+    let(:output_path) { nil }
+    let(:ffmpeg){ FFMpeg.new(filename: filename, output_path: output_path) }
     let(:runner) { double("runner") }
     before { ffmpeg.runner = runner }
 
@@ -39,7 +39,7 @@ module FFSplitter
       let(:chapter) { Chapter.new(start_frames: 10, end_frames: 30, timebase: 1, title: "test title") }
 
       context "without an output directory" do
-        let(:output_directory) { nil }
+        let(:output_path) { nil }
         it "creates a chapter command" do
           expect(command).to match("-ss #{chapter.start_time}")
           expect(command).to match("-i '#{filename}'")
@@ -50,7 +50,7 @@ module FFSplitter
       end
 
       context "with an output directory" do
-        let(:output_directory) { "test_dir" }
+        let(:output_path) { File.expand_path("test_dir/") }
         it "creates returns the path to that directory" do
           expect(command).to match("#{File.expand_path(chapter.filename, "test_dir")}")
         end
