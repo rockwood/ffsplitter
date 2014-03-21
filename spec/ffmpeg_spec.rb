@@ -34,7 +34,6 @@ module FFSplitter
     end
 
     describe "#chapter_command" do
-
       let(:chapter) { Chapter.new(start_frames: 10, end_frames: 30, timebase: 1, title: "test title") }
       let(:command) { ffmpeg.chapter_command(chapter) }
       context "without an output directory" do
