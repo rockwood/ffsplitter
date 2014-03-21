@@ -59,8 +59,8 @@ module FFSplitter
 
     describe "#read_metadata" do
       it "reads the metadata" do
-        expect(runner).to receive(:run).with("ffmpeg -i 'test.mp4' -v quiet -f ffmetadata -")
-        ffmpeg.read_metadata
+        expect(runner).to receive(:run).with("ffmpeg -i 'test.mp4' -v quiet -f ffmetadata -").and_return "meta"
+        expect(ffmpeg.read_metadata).to eq("meta")
       end
     end
   end
