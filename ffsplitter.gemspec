@@ -5,18 +5,21 @@ require 'ffsplitter/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "ffsplitter"
+
   spec.version       = FFSplitter::VERSION
   spec.authors       = ["Kevin Rockwood"]
   spec.email         = ["kevin@rockwood.me"]
   spec.description   = %q{Split video files into chapters}
   spec.summary       = %q{ffsplitter will split a video file by its chapters}
-  spec.homepage      = "http://rockwoodpro.com"
+  spec.homepage      = "http://github.com/rockwood/ffsplitter"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
+
+  spec.required_ruby_version = '~> 1.9.3'
 
   spec.add_dependency "virtus", "~> 1.0.0"
 
