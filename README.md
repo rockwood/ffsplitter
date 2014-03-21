@@ -1,25 +1,32 @@
 # FFSplitter
 
+## Prerequisites
+
+Install [FFMpeg](http://www.ffmpeg.org/)
+
 ## Installation
 
-    brew install ffmpeg
     gem install ffsplitter
 
 ## Usage
 
-`ffsplitter my-video.mp4`
+```
+ffsplitter test.mp4 [options]
+  -e, --output-extension EXTENSION
+  -o, --output-path PATH
+```
 
-or
+### Output extension
 
-`ffsplitter my-video.mp4 output-directory/`
+Output files use the same extension as the input file. For custom output
+extensions, pass the `-e` option. For example:
 
-Output files will use the same extension as the input file. For custom output
-extensions, pass the -e option
+    ffsplitter my-video.mp4 -e .aac
 
-`ffsplitter my-video.mp4 -e .aac`
+will produce audio-only .aac files for each chapter.
 
-This will produce audio-only .aac files for each chapter. NOTE: codecs are copied
-from the source file, so you must use an compatible extension
+**NOTE:** Codecs are copied from the source file, so you must use a
+compatible extension.
 
 ## Testing
 
@@ -32,3 +39,7 @@ from the source file, so you must use an compatible extension
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## To Do
+
+1. Handle extensions without a leading `.`
