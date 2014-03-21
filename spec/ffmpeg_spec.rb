@@ -55,6 +55,13 @@ module FFSplitter
           expect(command).to match("#{File.expand_path(chapter.filename, "test_dir")}")
         end
       end
+
+      context "audio only" do
+        let(:options) { {audio_only: true} }
+        it "passes the -vn option" do
+          expect(command).to match("-vn")
+        end
+      end
     end
 
     describe "#read_metadata" do
