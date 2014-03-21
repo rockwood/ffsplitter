@@ -21,10 +21,6 @@ class ArgsParser
       opts.on("-o", "--output-path PATH", "Output path") do |dir|
         options.output_path = File.expand_path(dir)
       end
-
-      opts.on("-a", "--audio", "audio only") do |bool|
-        options.audio_only = bool
-      end
     end
 
     parser.parse!(args)

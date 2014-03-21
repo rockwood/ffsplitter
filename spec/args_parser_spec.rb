@@ -39,19 +39,4 @@ describe ArgsParser do
       end
     end
   end
-
-  describe "audio_only" do
-    context "undefined" do
-      let(:args) { [] }
-      specify do
-        expect(options.audio_only).to be_false
-      end
-    end
-    context "defined" do
-      let(:args) { ["-a"] }
-      specify do
-        expect(options.audio_only).to be_true
-      end
-    end
-  end
 end
