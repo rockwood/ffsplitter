@@ -10,32 +10,17 @@ describe ArgsParser do
     end
   end
 
-  describe "audio extension" do
+  describe "output_extension" do
     context "undefined" do
       let(:args) { [] }
       specify do
-        expect(options.audio_extension).to eq(".wav")
+        expect(options.output_extension).to eq(".mp4")
       end
     end
     context "defined" do
-      let(:args) { ["-a", ".mp3"] }
+      let(:args) { ["-e", ".mp3"] }
       specify do
-        expect(options.audio_extension).to eq(".mp3")
-      end
-    end
-  end
-
-  describe "video_extension" do
-    context "undefined" do
-      let(:args) { [] }
-      specify do
-        expect(options.video_extension).to eq(".mp4")
-      end
-    end
-    context "defined" do
-      let(:args) { ["-v", ".mov"] }
-      specify do
-        expect(options.video_extension).to eq(".mov")
+        expect(options.output_extension).to eq(".mp3")
       end
     end
   end
@@ -51,6 +36,21 @@ describe ArgsParser do
       let(:args) { ["-o", "test/"] }
       specify do
         expect(options.output_path).to eq(File.expand_path("test/"))
+      end
+    end
+  end
+
+  describe "audio_only" do
+    context "undefined" do
+      let(:args) { [] }
+      specify do
+        expect(options.audio_only).to be_false
+      end
+    end
+    context "defined" do
+      let(:args) { ["-a"] }
+      specify do
+        expect(options.audio_only).to be_true
       end
     end
   end

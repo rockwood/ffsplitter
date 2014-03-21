@@ -3,8 +3,8 @@ require 'ostruct'
 
 class ArgsParser
   DEFAULT_OPTIONS = {
-    audio_extension: '.wav',
-    video_extension: '.mp4',
+    output_extension: '.mp4',
+    audio_only: false
   }
 
   def self.parse!(args)
@@ -12,16 +12,18 @@ class ArgsParser
     options.filename = args[0]
 
     parser = OptionParser.new do |opts|
-      opts.on("-a", "--audio EXTENSION", "Audio extension") do |extension|
-        options.audio_extension = extension
+      opts.banner = "Usage: ffsplitter test.mp4 [options]"
+
+      opts.on("-e", "--output-extension EXTENSION", "Output extension(default: .mp4)") do |ext|
+        options.output_extension = ext
       end
 
-      opts.on("-v", "--video EXTENSION", "Video extension") do |extension|
-        options.video_extension = extension
-      end
-
-      opts.on("-o", "--output PATH", "Output path") do |dir|
+      opts.on("-o", "--output-path PATH", "Output path") do |dir|
         options.output_path = File.expand_path(dir)
+      end
+
+      opts.on("-a", "--audio", "audio only") do |bool|
+        options.audio_only = bool
       end
     end
 
