@@ -3,7 +3,6 @@ require 'ostruct'
 
 class ArgsParser
   DEFAULT_OPTIONS = {
-    output_extension: '.mp4',
     audio_only: false
   }
 
@@ -14,7 +13,7 @@ class ArgsParser
     parser = OptionParser.new do |opts|
       opts.banner = "Usage: ffsplitter test.mp4 [options]"
 
-      opts.on("-e", "--output-extension EXTENSION", "Output extension(default: .mp4)") do |ext|
+      opts.on("-e", "--output-extension EXTENSION", "Output extension") do |ext|
         options.output_extension = ext
       end
 

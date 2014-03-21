@@ -1,12 +1,12 @@
 module FFSplitter
   class FFMpeg
     CODEC_OPTIONS= "-c copy -movflags faststart"
-    attr_accessor :filename, :output_path, :runner, :output_extension, :audio_only
+    attr_accessor :filename, :output_path, :runner, :output_extension
 
     def initialize(options)
       @filename         = options[:filename]
       @output_path      = options[:output_path]
-      @output_extension = options[:output_extension]
+      @output_extension = options[:output_extension] || File.extname(@filename)
       @runner = CommandRunner
     end
 

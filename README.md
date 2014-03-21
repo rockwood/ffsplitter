@@ -9,9 +9,17 @@
 
 `ffsplitter my-video.mp4`
 
-or 
+or
 
 `ffsplitter my-video.mp4 output-directory/`
+
+Output files will use the same extension as the input file. For custom output
+extensions, pass the -e option
+
+`ffsplitter my-video.mp4 -e .aac`
+
+This will produce audio-only .aac files for each chapter. NOTE: codecs are copied
+from the source file, so you must use an compatible extension
 
 ## Testing
 
