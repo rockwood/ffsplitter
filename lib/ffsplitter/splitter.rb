@@ -1,7 +1,7 @@
 module FFSplitter
   class Splitter
-    def self.split_via_ffmpeg(filename, output_directory)
-      split(FFMpeg.new(filename, output_directory))
+    def self.split_via_ffmpeg(options)
+      split(FFMpeg.new(options))
     end
 
     def self.split(codec)

@@ -1,4 +1,5 @@
 require "ffsplitter/version"
+require "ffsplitter/args_parser"
 require "ffsplitter/metadata_parser"
 require "ffsplitter/chapter"
 require "ffsplitter/chapter_list"
@@ -21,7 +22,8 @@ module FFSplitter
         puts "WTF mate?"
         exit(1)
       else
-        Splitter.split_via_ffmpeg(@argv[0], @argv[1])
+        options = ArgsParser.parse!(@argv)
+        Splitter.split_via_ffmpeg(options)
       end
     end
   end
