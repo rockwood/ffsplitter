@@ -24,7 +24,7 @@ module FFSplitter
     end
 
     def filename
-      "#{track} #{title.gsub(/[';:\\]/, '').lstrip}"
+      "#{track} #{title.gsub('/', ' - ').gsub(/[';:\\]/, '').lstrip}"
     end
 
     def index
